@@ -232,6 +232,7 @@ function createPyramid(gl, translation, rotationAxis)
             primtype:gl.TRIANGLES, modelViewMatrix: mat4.create(), currentTime : Date.now()};
 
     mat4.translate(cube.modelViewMatrix, cube.modelViewMatrix, translation);
+    let counter = 0;
 
     cube.update = function()
     {
@@ -247,6 +248,7 @@ function createPyramid(gl, translation, rotationAxis)
         // Number rad the angle to rotate the matrix by
         // vec3 axis the axis to rotate around
         mat4.rotate(this.modelViewMatrix, this.modelViewMatrix, angle, rotationAxis);
+
     };
 
     return cube;
@@ -365,6 +367,7 @@ function createOct(gl, translation, rotationAxis)
             primtype:gl.TRIANGLES, modelViewMatrix: mat4.create(), currentTime : Date.now()};
 
     mat4.translate(cube.modelViewMatrix, cube.modelViewMatrix, translation);
+    let counter = 0;
 
     cube.update = function()
     {
@@ -380,16 +383,206 @@ function createOct(gl, translation, rotationAxis)
         // Number rad the angle to rotate the matrix by
         // vec3 axis the axis to rotate around
         mat4.rotate(this.modelViewMatrix, this.modelViewMatrix, angle, rotationAxis);
-        console.log(this.modelViewMatrix[13]);
 
-
-
-        if (Math.floor(this.modelViewMatrix[13]) != 2) {
+        if (counter < 187) {
             mat4.translate(this.modelViewMatrix, this.modelViewMatrix, [0,0.01,0]);
-            console.log("entraaa")
-        }else{
-            mat4.translate(this.modelViewMatrix, this.modelViewMatrix, [0,-0.01,0]);
+            counter++;
         }
+        else if (counter >= 187 && counter <561){
+            mat4.translate(this.modelViewMatrix, this.modelViewMatrix, [0,-0.01,0]);
+            counter++;
+        }
+        else{
+            counter = -187;
+        }
+        console.log(counter);
+
+    };
+
+    return cube;
+}
+
+function createDod(gl, translation, rotationAxis)
+{
+    // Vertex Data
+    let vertexBuffer;
+    vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+    let x = (1 + Math.sqrt(5))/2;
+
+    let verts = [];
+    verts.push(x, 0, 1/x);
+    verts.push(x, 0, -(1/x));
+    verts.push(1, -1, -1);
+    verts.push(1, -1, 1);
+    verts.push(1/x, -x, 0);
+
+    verts.push(x, 0, (1/x));
+    verts.push(1, -1, 1);
+    verts.push(0, 1/x, x);
+    verts.push(0, -1/x, x);
+    verts.push(1, 1, 1);
+
+    verts.push(1, 1, 1);
+    verts.push(1/x, x, 0);
+    verts.push(1, 1, -1);
+    verts.push(x, 0, -1/x);
+    verts.push(x, 0, (1/x));
+
+    verts.push(0, 1/x, x);
+    verts.push(1, 1, 1);
+    verts.push(1/x, x, 0);
+    verts.push(-1/x, x, 0);
+    verts.push(-1, 1, 1);
+
+    verts.push(1/x, x, 0);
+    verts.push(-1/x, x, 0);
+    verts.push(-1, 1, -1);
+    verts.push(0, 1/x, -x);
+    verts.push(1, 1, -1);
+
+    verts.push(1, 1, -1);
+    verts.push(x, 0, -(1/x));
+    verts.push(1, -1, -1);
+    verts.push(0, -1/x, -x);
+    verts.push(0, 1/x, -x);
+
+    verts.push(0, 1/x, -x);
+    verts.push(0, -1/x, -x);
+    verts.push(-1, 1, -1);
+    verts.push(-x, 0, -(1/x));
+    verts.push(-1, -1, -1);
+
+    verts.push(-1, -1, -1);
+    verts.push(0, -1/x, -x);
+    verts.push(1, -1, -1);
+    verts.push(1/x, -x, 0);
+    verts.push(-1/x, -x, 0);
+
+    verts.push(-1/x, -x, 0);
+    verts.push(1/x, -x, 0);
+    verts.push(1, -1, 1);
+    verts.push(0, -1/x, x);
+    verts.push(-1, -1, 1);
+
+    verts.push(-1, -1, 1);
+    verts.push(0, -1/x, x);
+    verts.push(0, 1/x, x);
+    verts.push(-1, 1, 1);
+    verts.push(-x, 0, (1/x));
+
+    verts.push(-x, 0, (1/x));
+    verts.push(-1, -1, 1);
+    verts.push(-1/x, -x, 0);
+    verts.push(-1, -1, -1);
+    verts.push(-x, 0, -(1/x));
+
+    verts.push(-x, 0, -(1/x));
+    verts.push(-1, 1, -1);
+    verts.push(-1/x, x, 0);
+    verts.push(-1, 1, 1);
+    verts.push(-x, 0, (1/x));
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+
+    // Color data
+    let colorBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+    let faceColors = [
+
+        [1.0, 0.0, 0.0, 1.0], // FACE1
+        [0.0, 1.0, 0.0, 1.0], // FACE2
+        [0.0, 0.0, 1.0, 1.0], // FACE3
+        [1.0, 1.0, 1.0, 1.0], // FACE4
+        [1.0, 1.0, 0.0, 1.0], 
+        [0.0, 1.0, 1.0, 1.0], 
+        [1.0, 0.0, 0.1, 1.0], 
+        [0.3, 0.0, 1.0, 1.0],
+        [1.0, 0.0, 0.5, 1.0],
+        [1.0, 0.5, 0.0, 1.0],
+        [0.3, 0.5, 0.3, 1.0],
+        [1.0, 0.0, 1.0, 1.0],  
+    ];
+
+    // Each vertex must have the color information, that is why the same color is concatenated 4 times, one for each vertex of the cube's face.
+    let vertexColors = [];
+     for (const color of faceColors)
+    {
+         for (let j=0; j < 5; j++)
+             vertexColors.push(...color);
+    }
+
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexColors), gl.STATIC_DRAW);
+
+    // Index data (defines the triangles to be drawn).
+    let cubeIndexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
+
+    let cubeIndices = [
+        0,1,2,3,4,
+        0,2,4,
+
+        5,6,7,8,9,
+        5,7,8,
+
+        10,11,12,13,14,
+        10,12,14,
+
+        15,16,17,18,19,
+        15,17,19,
+
+        20,21,22,23,24,
+        20,22,24,
+        
+        25,26,27,28,29,
+        25,27,29,
+
+        30,31,32,33,34,
+        30,31,34,
+
+        35,36,37,38,39,
+        35,37,39,
+
+        40,41,42,43,44,
+        40,42,44,
+
+        45,46,47,48,49,
+        45,47,49,
+
+        50,51,52,53,54,
+        50,52,54,
+
+        55,56,57,58,59
+        ,55,57,59
+
+    ];
+
+    // gl.ELEMENT_ARRAY_BUFFER: Buffer used for element indices.
+    // Uint16Array: Array of 16-bit unsigned integers.
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
+
+    let cube = {
+            buffer:vertexBuffer, colorBuffer:colorBuffer, indices:cubeIndexBuffer,
+            vertSize:3, nVerts:12, colorSize:4, nColors: 12  , nIndices:96,
+            primtype:gl.TRIANGLE_STRIP, modelViewMatrix: mat4.create(), currentTime : Date.now()};
+
+    mat4.translate(cube.modelViewMatrix, cube.modelViewMatrix, translation);
+
+    cube.update = function()
+    {
+        let now = Date.now();
+        let deltat = now - this.currentTime;
+        this.currentTime = now;
+        let fract = deltat / duration;
+        let angle = Math.PI * 2 * fract;
+
+        // Rotates a mat4 by the given angle
+        // mat4 out the receiving matrix
+        // mat4 a the matrix to rotate
+        // Number rad the angle to rotate the matrix by
+        // vec3 axis the axis to rotate around
+        mat4.rotate(this.modelViewMatrix, this.modelViewMatrix, angle, rotationAxis);
+        
 
     };
 

@@ -17,12 +17,12 @@
 		        initViewport(gl, canvas);
 		        initGL(canvas);
 				initShader(gl);
-				var pyramid = createPyramid(gl, [-3.5 , -2, -5], [0.1, 1.0, 0.2]);
-				//var oct = createOct(gl, [3.5 , -2, -5], [1, 0, 0]);
-				var oct = createOct(gl, [1.5, -1, -1], [0, 1, 0]);
+				var pyramid = createPyramid(gl, [-5.0 , -1.4, -7], [0.1, 1.0, 0.2]);
+				var dod = createDod(gl, [0 , 0, -7], [0, 1, 0]);
+				var oct = createOct(gl, [2.8, 0, -2], [0, 1, 0]);
 				// TO DO: create and draw the figures
 				//run(gl, [pyramid,oct]);
-				run(gl,[pyramid,oct])
+				run(gl,[pyramid,oct,dod])
 			}
 	);
 
