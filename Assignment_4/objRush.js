@@ -230,7 +230,7 @@ function onDocumentMouseDown(event)
         //Por alguna razon el parent es el objecto real
         CLICKED = intersects[ intersects.length - 1 ].object;
         //CLICKED.material.emissive.setHex( 0x00ff00 );
-        clickedObject = CLICKED = intersects[ intersects.length - 1 ].object.parent;
+        clickedObject = intersects[ intersects.length - 1 ].object.parent;
         //console.log("CLICKEADO LOL -----------------------");
         console.log(clickedObject.name);
 
@@ -333,8 +333,8 @@ function gameOver(){
                 document.getElementById("gg").innerHTML = "Your score is: " + score + " -- High Score: " + score;
             }
 
-            boton =  document.getElementById('lol');
-            boton.style.display = "block";
+           // boton =  document.getElementById('lol');
+            //boton.style.display = "flex";
             
             canvasGO = document.getElementById('webglcanvas');
             canvasGO.style.display = "none";

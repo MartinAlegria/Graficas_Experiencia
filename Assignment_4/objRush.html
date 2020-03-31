@@ -23,7 +23,7 @@
 <script src="../libs/three.js/loaders/OBJLoader.js"></script>
 <script src="../libs/three.js/utils/promiseLoader.js"></script>
 
-<script src="./threejsInteraction.js"></script>
+<script src="./objRush.js"></script>
 
 <style>
     html, body {
@@ -51,12 +51,13 @@
     }
     #lol{
         position: absolute;
-        left: 450 px;
-        padding-left: 450px;
-        top: 20px;
+        left: 20px;
+        
+        top: 60px;
         font-family: Arial;
         font-size: 20px;
-        display: none;
+        flex-direction: column;
+        display: flex;
     }
     #goIMG{
         display: none;
@@ -83,6 +84,7 @@
         font-family: Arial;
         font-size: 20px;
     }
+    
 </style>
 
 <script type="text/javascript">
@@ -101,8 +103,10 @@
 </script>
 
 </head>
+<body>
 <div id="container">
     <canvas id="webglcanvas"></canvas>
+    <div id = "header">
         <div id = "gg">
         </div>
         <div id="timer">
@@ -111,17 +115,18 @@
         <div id="score">
             Score: 0
         </div>
+        
         <div id = "lol">
             <button type="button" class="btn btn-primary" onclick="history.go(0);">Restart Game</button>
         </div>
-        
     </div>
+        
 </div>
 
-<body>
-    <div id = "goIMG">
-        <img src="https://elements-video-cover-images-0.imgix.net/files/961bcd50-cb8b-4632-b46c-3abb528c984d/inline_image_preview.jpg?auto=compress%2Cformat&fit=min&h=394&w=700&s=93c72c1aa4b82afae60d8ffa2a8dd7e1">
-    </div>
+<div id = "goIMG">
+    <img src="https://elements-video-cover-images-0.imgix.net/files/961bcd50-cb8b-4632-b46c-3abb528c984d/inline_image_preview.jpg?auto=compress%2Cformat&fit=min&h=394&w=700&s=93c72c1aa4b82afae60d8ffa2a8dd7e1">
+</div>
+
 </body>
 
 </html>
